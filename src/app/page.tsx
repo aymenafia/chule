@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div>
-      <main className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex flex-col flex-1">
+      <main className="flex justify-center flex-1">
         <h1 className="text-6xl font-bold">Hello to quizz page👋</h1>
       </main>
 
-      <footer>
+      <footer className="footer pb-9 px-6 relative">
         <Button>Start</Button>
       </footer>
     </div>
