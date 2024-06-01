@@ -6,7 +6,7 @@ import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 
-// import saveQuizz from "./saveToDb";
+import saveQuizz from "./saveToDb";
 
 export async function POST(req: NextRequest) {
   const body = await req.formData();
@@ -91,12 +91,12 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    const result: any = await model.invoke([message]);
+    const result: any = await runnable.invoke([message]);
     console.log(result);
 
-    // const { quizzId } = await saveQuizz(result.quizz);
+    const { quizzId } = await saveQuizz(result.quizz);
     console.log(result);
-    return NextResponse.json({ result }, { status: 200 });
+    return NextResponse.json({ quizzId }, { status: 200 });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
