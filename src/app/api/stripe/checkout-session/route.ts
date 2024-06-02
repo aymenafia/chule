@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       .where(eq(users.id, userId));
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NODE_ENV === "production" ? "https://chule.vercel.app"  : "http://localhost:3000";
 
   try {
     const session = await stripe.checkout.sessions.create({

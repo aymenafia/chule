@@ -22,6 +22,7 @@ export async function POST(req: Request) {
   }
   console.log("-----------------");
 
+
   if (!sig) return;
 
   const event = stripe.webhooks.constructEvent(body, sig, webHookSecret);
