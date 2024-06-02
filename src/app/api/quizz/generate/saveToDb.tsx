@@ -5,6 +5,7 @@ import {
   questionAnswers,
 } from "@/db/schema";
 import { InferInsertModel } from "drizzle-orm";
+import { auth, signIn } from "@/auth";
 
 type Quizz = InferInsertModel<typeof quizzes>;
 type Question = InferInsertModel<typeof dbQuestions>;
@@ -16,12 +17,16 @@ interface SaveQuizzData extends Quizz {
 
 export default async function saveQuizz(quizzData: SaveQuizzData) {
   const { name, description, questions } = quizzData;
-
+  console.log(quizzData);
+  const session = await auth();
+  // const router = useRouter();
+  const userId = session?.user?.id;
   const newQuizz = await db
     .insert(quizzes)
     .values({
       name,
       description,
+      userId,
     })
     .returning({ insertedId: quizzes.id });
   const quizzId = newQuizz[0].insertedId;

@@ -48,10 +48,10 @@ export function NavMenu() {
             <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <User className="mr-2 h-4 w-4" />
           <span>Profile</span>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem>
           <Link
             href="/quizz/new"
@@ -70,13 +70,13 @@ export function NavMenu() {
             <span>Billing</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
           <span>Settings</span>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup>
+      {/* <DropdownMenuSeparator /> */}
+      {/* <DropdownMenuGroup>
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <UserPlus className="mr-2 h-4 w-4" />
@@ -100,16 +100,16 @@ export function NavMenu() {
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>
-      </DropdownMenuGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
+      </DropdownMenuGroup> */}
+      {/* <DropdownMenuSeparator /> */}
+      {/* <DropdownMenuItem>
         <Github className="mr-2 h-4 w-4" />
         <span>GitHub</span>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
+      </DropdownMenuItem> */}
+      {/* <DropdownMenuItem>
         <LifeBuoy className="mr-2 h-4 w-4" />
         <span>Support</span>
-      </DropdownMenuItem>
+      </DropdownMenuItem> */}
     </DropdownMenuContent>
   );
 }
