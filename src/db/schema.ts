@@ -25,6 +25,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   quizzes: many(quizzes),
 }));
 
+
 export const accounts = pgTable(
   "account",
   {
