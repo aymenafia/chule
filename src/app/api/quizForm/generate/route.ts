@@ -29,15 +29,15 @@ export async function POST(req: NextRequest) {
     const prompt =
       "given the text which is a summary of the document, generate a quiz based on the text. Return json only that contains a quizz object with fields: name, description and questions. The questions is an array of objects with fields: questionText, answers. The answers is an array of objects with fields: answerText, isCorrect.";
 
-    if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json(
-        { error: "OpenAI API key not provided" },
-        { status: 500 }
-      );
-    }
+    // if (!process.env.OPENAI_API_KEY) {
+    //   return NextResponse.json(
+    //     { error: "OpenAI API key not provided" },
+    //     { status: 500 }
+    //   );
+    // }
 
     const model = new ChatOpenAI({
-      openAIApiKey: process.env.OPENAI_API_KEY,
+      openAIApiKey: "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",
       modelName: "gpt-4-1106-preview",
     });
 
