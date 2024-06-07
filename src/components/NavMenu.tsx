@@ -70,7 +70,7 @@ export function NavMenu() {
             <span>Billing</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <Link
             href="/menu"
             className="flex flexr-row"
@@ -78,7 +78,7 @@ export function NavMenu() {
             <Settings className="mr-2 h-4 w-4" />
             <span>Menu</span>
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuGroup>
 
       {/* <DropdownMenuSeparator /> */}

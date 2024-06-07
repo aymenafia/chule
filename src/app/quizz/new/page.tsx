@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { PRICE_ID } from "@/lib/utils";
 import UpgradePlan from "../UpgradePlan";
 import TransalationForm from "../TranslationForm";
+import SubjectForm from "../SubjectForm";
 
 import { redirect } from "next/navigation";
 
@@ -48,10 +49,12 @@ const page = async () => {
               defaultValue="account"
               className="w-[400px]"
             >
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="account">Your Quiz with AI</TabsTrigger>
-                <TabsTrigger value="password">Upload your Document</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="account">Your Quiz</TabsTrigger>
+                <TabsTrigger value="password">Document</TabsTrigger>
+                <TabsTrigger value="subject"> Subject</TabsTrigger>
               </TabsList>
+
               <TabsContent value="account">
                 <Card>
                   <CardHeader>
@@ -59,10 +62,19 @@ const page = async () => {
                   </CardHeader>
                 </Card>
               </TabsContent>
+
               <TabsContent value="password">
                 <Card>
                   <CardHeader>
                     <UploadDoc />
+                  </CardHeader>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="subject">
+                <Card>
+                  <CardHeader>
+                    <SubjectForm />
                   </CardHeader>
                 </Card>
               </TabsContent>
