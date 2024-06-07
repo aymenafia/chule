@@ -6,23 +6,26 @@ import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 
-import saveQuizz from "./saveToDb";
+import saveQuizz from "@/api/quizz/generate/saveToDb";
 
 export async function POST(req: NextRequest) {
-  const body = await req.formData();
-  const document = body.get("pdf");
+  const body = await req.json();
 
   try {
-    const pdfLoader = new PDFLoader(document as Blob, {
-      parsedItemSeparator: " ",
-    });
-    const docs = await pdfLoader.load();
+    if (
+      !Array.isArray(body) ||
+      !body.every((item) => typeof item === "string")
+    ) {
+      return NextResponse.json(
+        { error: "Invalid input, expected an array of strings" },
+        { status: 400 }
+      );
+    }
+    const texts = body;
 
-    const selectedDocuments = docs.filter(
-      (doc) => doc.pageContent !== undefined
+    const selectedDocuments = texts.filter(
+      (text) => text !== undefined && text.trim() !== ""
     );
-    const texts = selectedDocuments.map((doc) => doc.pageContent);
-
     const prompt =
       "given the text which is a summary of the document, generate a quiz based on the text. Return json only that contains a quizz object with fields: name, description and questions. The questions is an array of objects with fields: questionText, answers. The answers is an array of objects with fields: answerText, isCorrect.";
 

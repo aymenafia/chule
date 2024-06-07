@@ -16,8 +16,25 @@ const Page = () => {
   const router = useRouter();
 
   const handleClick = (animal: string) => {
-    console.log("animal");
-    router.push(`/quizz/8`);
+    switch (animal) {
+      case "A1":
+        router.push(`/quizz/1`);
+        break;
+      case "A2":
+        router.push(`/quizz/2`);
+        break;
+      case "B1":
+        router.push(`/quizz/3`);
+        break;
+      case "B2":
+        router.push(`/quizz/4`);
+        break;
+      case "C1":
+        router.push(`/quizz/5`);
+        break;
+      default:
+        console.log("Unknown animal");
+    }
   };
 
   return (

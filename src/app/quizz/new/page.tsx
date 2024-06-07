@@ -6,7 +6,22 @@ import { getStripe } from "@/lib/stripe-client";
 import { useRouter } from "next/navigation";
 import { PRICE_ID } from "@/lib/utils";
 import UpgradePlan from "../UpgradePlan";
+import TransalationForm from "../TranslationForm";
+
 import { redirect } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const page = async () => {
   const session = await auth();
@@ -29,7 +44,29 @@ const page = async () => {
             <h2 className="text-3xl font-bold mb-4">
               What do you want to be quizzed about today?
             </h2>
-            <UploadDoc />
+            <Tabs
+              defaultValue="account"
+              className="w-[400px]"
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="account">Your Quiz with AI</TabsTrigger>
+                <TabsTrigger value="password">Upload your Document</TabsTrigger>
+              </TabsList>
+              <TabsContent value="account">
+                <Card>
+                  <CardHeader>
+                    <TransalationForm />
+                  </CardHeader>
+                </Card>
+              </TabsContent>
+              <TabsContent value="password">
+                <Card>
+                  <CardHeader>
+                    <UploadDoc />
+                  </CardHeader>
+                </Card>
+              </TabsContent>
+            </Tabs>
           </>
         ) : (
           <UpgradePlan />
