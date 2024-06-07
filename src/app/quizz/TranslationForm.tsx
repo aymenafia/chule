@@ -48,39 +48,45 @@ const TransalationForm = () => {
   const [translations, setTranslations] = useState<Translation[]>([]);
   const [arrayOfStrings, setArrayOfStrings] = useState<string[]>([]);
   const { toast } = useToast();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleAddTranslation = () => {
-    setTranslations([
-      ...translations,
-      { english: englishWord, german: germanWord },
-    ]);
-    setEnglishWord("");
-    setGermanWord("");
-    setArrayOfStrings((prevArray) => [
-      ...prevArray,
-      `${englishWord} the translation in German is ${germanWord}`,
-    ]);
-
-    console.log(englishWord);
-    console.log(germanWord);
-
-    console.log(arrayOfStrings);
+    if (!englishWord || !germanWord) {
+      // Show error message if either input is empty
+      setErrorMessage("Both English and German words are required.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 4000);
+      return;
+    } else {
+      setTranslations([
+        ...translations,
+        { english: englishWord, german: germanWord },
+      ]);
+      setEnglishWord("");
+      setGermanWord("");
+      setArrayOfStrings((prevArray) => [
+        ...prevArray,
+        `${englishWord} the translation in German is ${germanWord}`,
+      ]);
+      setSuccessMessage("Translation added successfully!");
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 2000);
+    }
   };
 
   const clickSubmit = () => {
-    const clickSubmit = () => {
-      if (arrayOfStrings.length === 0) {
-        toast({
-          title: "Scheduled: Catch up",
-          description: "Friday, February 10, 2023 at 5:57 PM",
-          action: (
-            <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
-          ),
-        });
-      } else {
-        setWordAdded(true);
-      }
-    };
+    if (arrayOfStrings.length === 0) {
+      setErrorMessage("Both English and German words are required.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 4000);
+      return;
+    } else {
+      setWordAdded(true);
+    }
   };
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -176,7 +182,6 @@ const TransalationForm = () => {
                 <Button
                   variant="outline"
                   className="px-4 py-2 rounded"
-                  type="submit"
                 >
                   Add
                 </Button>
@@ -189,6 +194,16 @@ const TransalationForm = () => {
               </div>
             </form>
           </Form>
+          {errorMessage && (
+            <div style={{ color: "red", marginTop: "10px" }}>
+              {errorMessage}
+            </div>
+          )}
+          {successMessage && (
+            <div style={{ color: "green", marginTop: "10px" }}>
+              {successMessage}
+            </div>
+          )}
         </div>
       ) : (
         <></>
