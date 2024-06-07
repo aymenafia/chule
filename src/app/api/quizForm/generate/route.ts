@@ -7,6 +7,8 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 
 import saveQuizz from "@/api/quizz/generate/saveToDb";
+export const maxDuration = 60; // 5 seconds
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -39,7 +41,7 @@ export async function POST(req: NextRequest) {
     const model = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
       modelName: "gpt-4-1106-preview",
-      timeout: 60000, // 60 seconds timeout
+      timeout: maxDuration * 1000, // 60 seconds timeout
     });
 
     const parser = new JsonOutputFunctionsParser();
