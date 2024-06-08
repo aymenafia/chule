@@ -9,7 +9,7 @@ export default function Home() {
         <div className="items-center flex flex-col sm:flex-row gap-20 justify-end mx-auto p-10 w-full sm:py-20 sm:w-[1000px]">
           <div>
             <Image
-              src="/images/owl-landing-no-bg.png"
+              src="/images/chule.png"
               width="400"
               height="400"
               alt="owl"

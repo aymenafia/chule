@@ -144,17 +144,17 @@ const SubjectForm = () => {
                 name="German Translation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>German Translation</FormLabel>
+                    <FormLabel>Enter the subject of the Quiz</FormLabel>
                     <FormControl>
                       <Input
                         style={{ marginLeft: "20px" }}
-                        placeholder="German Word"
+                        placeholder="Subject"
                         value={germanWord}
                         onChange={(e) => setGermanWord(e.target.value)}
                       />
                     </FormControl>
                     <FormDescription>
-                      This word you will be asked about.
+                      This subject you will be asked about.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
