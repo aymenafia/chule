@@ -3,12 +3,15 @@ import { InferSelectModel } from "drizzle-orm";
 import Link from "next/link";
 
 export type Quizz = InferSelectModel<typeof quizzes>;
-
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 type Props = {
   quizzes: Quizz[];
 };
 
 const QuizzesTable = (props: Props) => {
+  const t = useTranslations("Index");
+  const localActive = useLocale();
   return (
     <div className="rounded-md overflow-hidden p-5 border">
       <table className="table-auto">
@@ -22,7 +25,7 @@ const QuizzesTable = (props: Props) => {
           {props.quizzes.map((quizz: Quizz) => (
             <tr key={quizz.id}>
               <td>
-                <Link href={`/quizz/${quizz.id}`}>
+                <Link href={`/${localActive}/quizz/${quizz.id}`}>
                   <p className="text-blue-600 underline">{quizz.name}</p>
                 </Link>
               </td>

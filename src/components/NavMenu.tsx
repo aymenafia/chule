@@ -32,8 +32,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export function NavMenu() {
+  const t = useTranslations("Index");
+  const localActive = useLocale();
+  const localLink = `/${localActive}/quizz/new`; // Construct the link based on the locale
+
   return (
     <DropdownMenuContent className="w-56">
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -41,7 +47,7 @@ export function NavMenu() {
       <DropdownMenuGroup>
         <DropdownMenuItem>
           <Link
-            href="/dashboard"
+            href={`/${localActive}/dashboard`}
             className="flex flexr-row"
           >
             <BarChartBig className="mr-2 h-4 w-4" />
@@ -54,7 +60,7 @@ export function NavMenu() {
         </DropdownMenuItem> */}
         <DropdownMenuItem>
           <Link
-            href="/quizz/new"
+            href={`/${localActive}/quizz/new`}
             className="flex flexr-row"
           >
             <Plus className="mr-2 h-4 w-4" />
@@ -63,7 +69,7 @@ export function NavMenu() {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link
-            href="/billing"
+            href={`/${localActive}/billing`}
             className="flex flexr-row"
           >
             <CreditCard className="mr-2 h-4 w-4" />

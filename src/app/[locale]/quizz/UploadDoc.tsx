@@ -2,13 +2,16 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 const UploadDoc = () => {
   const [document, setDocument] = useState<File | null | undefined>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const router = useRouter();
+  const t = useTranslations("Index");
+  const localActive = useLocale();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +32,7 @@ const UploadDoc = () => {
         const data = await res.json();
         const quizzId = data.quizzId;
 
-        router.push(`/quizz/${quizzId}`);
+        router.push(`${localActive}/quizz/${quizzId}`);
       }
     } catch (e) {
       console.log("error while generating", e);

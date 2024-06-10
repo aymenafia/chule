@@ -12,7 +12,9 @@ import {
   quizzes,
 } from "@/db/schema";
 import { useRouter } from "next/navigation";
-import { saveSubmission } from "../actions/saveSubmissions";
+import { saveSubmission } from "@/actions/saveSubmissions";
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 type Answer = InferSelectModel<typeof questionAnswers>;
 type Question = InferSelectModel<typeof DbQuestions> & { answers: Answer[] };
@@ -32,6 +34,8 @@ export default function QuizzQuestions(props: Props) {
   >([]);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const router = useRouter();
+  const t = useTranslations("Index");
+  const localActive = useLocale();
 
   const handleNext = () => {
     if (!started) {
@@ -79,7 +83,7 @@ export default function QuizzQuestions(props: Props) {
   };
 
   const handleExit = () => {
-    router.push("/dashboard");
+    router.push(`${localActive}/dashboard`);
   };
 
   const scorePercentage: number = Math.round((score / questions.length) * 100);

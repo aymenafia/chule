@@ -41,6 +41,8 @@ interface Translation {
   english: string;
   german: string;
 }
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 const TransalationForm = () => {
   const [englishWord, setEnglishWord] = useState("");
@@ -50,6 +52,8 @@ const TransalationForm = () => {
   const { toast } = useToast();
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const t = useTranslations("Index");
+  const localActive = useLocale();
 
   const handleAddTranslation = () => {
     if (!englishWord || !germanWord) {
@@ -109,7 +113,7 @@ const TransalationForm = () => {
         const data = await res.json();
         const quizzId = data.quizzId;
 
-        router.push(`/quizz/${quizzId}`);
+        router.push(`/${localActive}/quizz/${quizzId}`);
       }
     } catch (e) {
       console.log("error while generating", e);

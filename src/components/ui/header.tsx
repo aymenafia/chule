@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { NavMenu } from "@/components/NavMenu";
+import LocalSwitcher from "../local-switcher";
 
 function SignOut() {
   return (
@@ -65,6 +66,7 @@ const Header = async () => {
                 </Button>
               </Link>
             )}
+            <LocalSwitcher />
           </div>
         </div>
       </nav>
