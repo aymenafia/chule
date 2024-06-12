@@ -66,7 +66,7 @@ const Header = async () => {
                 </Button>
               </Link>
             )}
-            <LocalSwitcher />
+            {/* <LocalSwitcher /> */}
           </div>
         </div>
       </nav>

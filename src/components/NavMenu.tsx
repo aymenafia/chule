@@ -14,6 +14,7 @@ import {
   UserPlus,
   Users,
   BarChartBig,
+  Book,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -78,11 +79,11 @@ export function NavMenu() {
         </DropdownMenuItem>
         {/* <DropdownMenuItem>
           <Link
-            href="/menu"
+            href={`/${localActive}/bookMenu`}
             className="flex flexr-row"
           >
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Menu</span>
+            <Book className="mr-2 h-4 w-4" />
+            <span>Books</span>
           </Link>
         </DropdownMenuItem> */}
       </DropdownMenuGroup>

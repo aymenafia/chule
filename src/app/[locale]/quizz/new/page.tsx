@@ -8,10 +8,13 @@ import { PRICE_ID } from "@/lib/utils";
 import UpgradePlan from "../UpgradePlan";
 import TransalationForm from "../TranslationForm";
 import SubjectForm from "../SubjectForm";
+import Link from "next/link";
 
 import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import {
   Card,
   CardContent,
@@ -45,6 +48,9 @@ const page = async () => {
             <h2 className="text-3xl font-bold mb-4">
               What do you want to be quizzed about today?
             </h2>
+            <Link href={`/en/bookMenu`}>
+              <p className="text-blue-600 underline">Go to Books</p>
+            </Link>
             <Tabs
               defaultValue="account"
               className="w-[400px]"
