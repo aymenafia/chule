@@ -3,11 +3,15 @@ import { auth } from "@/auth";
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
 import { users } from "@/db/schema";
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export async function POST(req: Request) {
   const { price, quantity = 1 } = await req.json();
   const userSession = await auth();
   const userId = userSession?.user?.id;
+  const t = useTranslations("Index");
+  const localActive = useLocale();
 
   if (!userId) {
     return new Response(
@@ -52,11 +56,14 @@ export async function POST(req: Request) {
       .where(eq(users.id, userId));
   }
 
-  const baseUrl = process.env.NODE_ENV === "production" ? "https://chule.vercel.app"  : "http://localhost:3000";
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://chule.vercel.app"
+      : "http://localhost:3000";
 
   try {
     const session = await stripe.checkout.sessions.create({
-      success_url: `${baseUrl}/billing/payment/success`,
+      success_url: `${baseUrl}/${localActive}/billing/payment/success`,
       customer: customer.id,
       payment_method_types: ["card"],
       line_items: [

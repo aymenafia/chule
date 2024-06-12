@@ -3,10 +3,14 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import { stripe } from "@/lib/stripe";
 import { eq } from "drizzle-orm";
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export async function POST(req: Request) {
   const session = await auth();
   const userId = session?.user?.id;
+  const t = useTranslations("Index");
+  const localActive = useLocale();
 
   if (!userId) {
     return new Response(
@@ -58,7 +62,7 @@ export async function POST(req: Request) {
 
   const url = await stripe.billingPortal.sessions.create({
     customer: customer.id,
-    return_url: `${baseUrl}/billing`,
+    return_url: `${baseUrl}/${localActive}/billing`,
   });
 
   return new Response(JSON.stringify({ url }), {
